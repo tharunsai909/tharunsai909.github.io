@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sai Tharun Sanga — SDE Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy-deep: #080f1a;
+      --navy-card: rgba(255,255,255,0.045);
+      --navy-border: rgba(200,218,255,0.1);
+      --blue-accent: #3a6ee8;
+      --blue-hover: #2d5dd4;
+      --blue-soft: rgba(58,110,232,0.18);
+      --text-primary: #eef1f8;
+      --text-secondary: rgba(200,215,245,0.72);
+      --text-muted: rgba(170,190,230,0.5);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy-deep);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 80% 10%, rgba(30,70,160,0.28) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 10% 80%, rgba(10,40,110,0.22) 0%, transparent 55%);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,15,26,0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--navy-border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 52px; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .nav-brand { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+    .nav-links { display: flex; gap: 1.4rem; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: #fff; }
+
+    /* HERO */
+    .hero { text-align: center; padding: 4.5rem 2rem 3.5rem; border-bottom: 0.5px solid var(--navy-border); }
+    .hero-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #3a6ee8, #1a3d8f);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 700; color: #fff;
+      margin: 0 auto 1.4rem;
+      border: 2px solid rgba(100,150,255,0.3);
+    }
+    .hero-name { font-size: 2.6rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+    .hero-title { font-size: 0.98rem; color: var(--text-secondary); margin-bottom: 0.6rem; line-height: 1.5; }
+    .hero-contact { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; }
+    .hero-contact a { color: #6fa3ef; text-decoration: none; }
+    .hero-contact a:hover { text-decoration: underline; }
+    .hero-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue-accent); color: #fff; border: none;
+      padding: 0.6rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; display: inline-block;
+      transition: background 0.18s, transform 0.1s;
+    }
+    .btn-primary:hover { background: var(--blue-hover); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--text-primary);
+      border: 1.5px solid rgba(200,218,255,0.3);
+      padding: 0.6rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; display: inline-block;
+      transition: border-color 0.18s, background 0.18s, transform 0.1s;
+    }
+    .btn-outline:hover { border-color: rgba(200,218,255,0.6); background: rgba(255,255,255,0.05); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    section { padding: 3rem 2rem; border-bottom: 0.5px solid var(--navy-border); max-width: 860px; margin: 0 auto; }
+    .section-title { font-size: 1.45rem; font-weight: 700; color: #fff; margin-bottom: 1.2rem; }
+
+    /* ABOUT */
+    .about-text { font-size: 0.97rem; color: var(--text-secondary); line-height: 1.8; }
+
+    /* SKILLS */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .skill-pill {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(200,218,255,0.16);
+      color: #cdd7ec; padding: 0.45rem 1.05rem; border-radius: 8px;
+      font-size: 0.88rem; font-weight: 500;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .skill-pill:hover { background: var(--blue-soft); border-color: rgba(100,150,255,0.4); color: #a8c4ff; }
+
+    /* EXPERIENCE */
+    .exp-card {
+      background: var(--navy-card); border: 0.5px solid var(--navy-border);
+      border-radius: 12px; padding: 1.4rem 1.6rem; margin-bottom: 1.2rem;
+      transition: border-color 0.18s;
+    }
+    .exp-card:hover { border-color: rgba(100,150,255,0.25); }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.3rem; }
+    .exp-role { font-size: 1rem; font-weight: 600; color: #fff; }
+    .exp-company { font-size: 0.88rem; color: #6fa3ef; font-weight: 500; margin-bottom: 0.6rem; }
+    .exp-period { font-size: 0.8rem; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 0.22rem 0.65rem; border-radius: 6px; white-space: nowrap; }
+    .exp-project { font-size: 0.9rem; font-weight: 600; color: #a8c4ff; margin: 0.9rem 0 0.35rem; }
+    .exp-desc { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.6rem; }
+    .exp-bullets { list-style: none; padding: 0; margin: 0.4rem 0 0.8rem; }
+    .exp-bullets li { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.7; padding-left: 1.1rem; position: relative; margin-bottom: 0.35rem; }
+    .exp-bullets li::before { content: '›'; position: absolute; left: 0; color: #6fa3ef; font-weight: 700; }
+
+    /* PROJECTS */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .proj-card {
+      background: var(--navy-card); border: 0.5px solid var(--navy-border);
+      border-radius: 12px; padding: 1.2rem 1.4rem;
+      transition: border-color 0.18s, transform 0.15s;
+    }
+    .proj-card:hover { border-color: rgba(100,150,255,0.3); transform: translateY(-2px); }
+    .proj-name { font-size: 0.97rem; font-weight: 600; color: #fff; margin-bottom: 0.4rem; }
+    .proj-desc { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0.75rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .proj-tag { background: rgba(58,110,232,0.16); border: 0.5px solid rgba(100,150,255,0.28); color: #a0bef5; font-size: 0.76rem; padding: 0.2rem 0.6rem; border-radius: 6px; }
+
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+    .stat-card { background: rgba(255,255,255,0.05); border: 0.5px solid var(--navy-border); border-radius: 10px; padding: 1rem 1.2rem; text-align: center; }
+    .stat-num { font-size: 1.6rem; font-weight: 700; color: #6fa3ef; }
+    .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+    /* CONTACT */
+    .contact-wrap { max-width: 600px; }
+    .contact-intro { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.6rem; line-height: 1.8; }
+    .contact-card {
+      background: var(--navy-card);
+      border: 0.5px solid var(--navy-border);
+      border-radius: 14px;
+      padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .contact-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid var(--navy-border);
+      border-radius: 10px;
+    }
+    .contact-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--blue-soft);
+      border: 0.5px solid rgba(100,150,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.15rem; }
+    .contact-value { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); }
+    .contact-value a { color: #6fa3ef; text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+    .btn-email {
+      display: block; text-align: center;
+      background: var(--blue-accent); color: #fff;
+      text-decoration: none; padding: 0.85rem;
+      border-radius: 10px; font-size: 0.95rem; font-weight: 600;
+      margin-top: 0.5rem;
+      transition: background 0.18s, transform 0.1s;
+    }
+    .btn-email:hover { background: var(--blue-hover); transform: translateY(-1px); }
+
+    /* CERTIFICATIONS */
+    .cert-list { list-style: none; }
+    .cert-list li { font-size: 0.9rem; color: var(--text-secondary); padding: 0.55rem 0; border-bottom: 0.5px solid var(--navy-border); display: flex; align-items: center; gap: 0.6rem; }
+    .cert-list li:last-child { border-bottom: none; }
+    .cert-dot { width: 7px; height: 7px; border-radius: 50%; background: #6fa3ef; flex-shrink: 0; }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--text-muted); border-top: 0.5px solid var(--navy-border); }
+
+    @media (max-width: 600px) {
+      .hero-name { font-size: 1.9rem; }
+      nav { padding: 0 1rem; }
+      section { padding: 2.2rem 1.2rem; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand">Sai Tharun Sanga</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-avatar">ST</div>
+    <h1 class="hero-name">Sai Tharun Sanga</h1>
+    <p class="hero-title">Software Development Engineer &nbsp;|&nbsp; Backend, Distributed Systems &amp; Cloud Platforms</p>
+    <p class="hero-contact">
+      Bengaluru, India &nbsp;·&nbsp;
+      <a href="mailto:tharunsai909@gmail.com">tharunsai909@gmail.com</a> &nbsp;·&nbsp;
+      +91 78999 32078
+    </p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="https://www.linkedin.com/in/saitharun701" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn-outline" href="#contact">Contact Me</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Years experience</div></div>
+      <div class="stat-card"><div class="stat-num">12+</div><div class="stat-label">REST APIs built</div></div>
+      <div class="stat-card"><div class="stat-num">85%+</div><div class="stat-label">Unit test coverage</div></div>
+      <div class="stat-card"><div class="stat-num">200ms</div><div class="stat-label">Transaction detection</div></div>
+    </div>
+    <p class="about-text">
+      Software Development Engineer with 4+ years of experience building backend systems in Java and Spring Boot
+      across Fintech and Travel domains. Specializes in microservices architecture, event-driven systems with
+      Apache Kafka, Redis caching strategies, and cloud deployments on AWS EC2 with Docker and Jenkins CI/CD.
+      Strong foundation in system design, API security (JWT, RBAC), and database optimization with MySQL and PostgreSQL.
+    </p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <span class="skill-pill">Java 8 / 11 / 17</span>
+      <span class="skill-pill">Spring Boot</span>
+      <span class="skill-pill">Spring Security</span>
+      <span class="skill-pill">Spring Data JPA</span>
+      <span class="skill-pill">Hibernate</span>
+      <span class="skill-pill">REST APIs</span>
+      <span class="skill-pill">Microservices</span>
+      <span class="skill-pill">Apache Kafka</span>
+      <span class="skill-pill">Redis</span>
+      <span class="skill-pill">MySQL</span>
+      <span class="skill-pill">PostgreSQL</span>
+      <span class="skill-pill">AWS EC2</span>
+      <span class="skill-pill">Docker</span>
+      <span class="skill-pill">Jenkins CI/CD</span>
+      <span class="skill-pill">JWT &amp; RBAC</span>
+      <span class="skill-pill">OAuth2</span>
+      <span class="skill-pill">JUnit &amp; Mockito</span>
+      <span class="skill-pill">Maven</span>
+      <span class="skill-pill">Git &amp; GitHub</span>
+      <span class="skill-pill">System Design</span>
+      <span class="skill-pill">Agile</span>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <h2 class="section-title">Experience</h2>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Software Engineer</div>
+          <div class="exp-company">Unizen Technologies Pvt Ltd — Bengaluru</div>
+        </div>
+        <span class="exp-period">Jan 2023 – Present</span>
+      </div>
+      <div class="exp-project">Fraud Detection &amp; Transaction Monitoring System</div>
+      <p class="exp-desc">Real-time financial transaction monitoring for a fintech client — rule-based fraud detection, async Kafka alerts, zero-downtime deployments on AWS EC2.</p>
+      <ul class="exp-bullets">
+        <li>Flagged suspicious transactions within 200 ms of event ingestion using Spring Boot real-time monitoring.</li>
+        <li>Integrated Kafka with a dedicated fraud-alert topic and dead-letter queue (DLQ) — sustained full throughput with zero data loss during upstream traffic spikes.</li>
+        <li>Deployed Redis cache-aside for risk-rule lookups; cut DB reads by 40% and reduced rule-evaluation latency from 120 ms to 70 ms.</li>
+        <li>Secured all endpoints with Spring Security and JWT; deployed full stack on AWS EC2 via Docker with blue-green deployment for zero-downtime releases.</li>
+      </ul>
+      <div class="exp-project">Travel Reservation &amp; Booking System</div>
+      <p class="exp-desc">Internal backend platform for concurrent travel and accommodation bookings — 3-service Spring Boot microservices with schema-per-service isolation, Redis caching, and Jenkins CI/CD.</p>
+      <ul class="exp-bullets">
+        <li>Designed a 3-service backend (reservations, user management, inventory) with schema-per-service isolation; deployed each service independently via Docker on AWS EC2.</li>
+        <li>Eliminated duplicate-booking incidents using optimistic locking and database-level transaction management under concurrent load.</li>
+        <li>Reduced API latency by 30% with Redis caching on availability and pricing queries; stabilized cache hit rate at 75% under normal load.</li>
+        <li>Configured Jenkins CI/CD with automated test gates and blue-green deployment; enabled sub-5-minute rollback on failed health checks.</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Software Engineer Intern</div>
+          <div class="exp-company">Unizen Technologies Pvt Ltd — Bengaluru</div>
+        </div>
+        <span class="exp-period">Jun 2022 – Dec 2022</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Developed and tested RESTful APIs using Spring Boot under senior developer guidance.</li>
+        <li>Gained hands-on experience with MySQL, Spring Data JPA, and query optimization.</li>
+        <li>Wrote unit tests with JUnit and Mockito; applied microservices concepts, Docker, and Git in a production environment.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-name">Fraud Detection System</div>
+        <p class="proj-desc">Real-time fintech transaction monitoring with Kafka DLQ pipelines, Redis risk-rule caching, and Spring Security JWT auth. Detects anomalies within 200 ms.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Java</span><span class="proj-tag">Kafka</span><span class="proj-tag">Redis</span><span class="proj-tag">AWS EC2</span><span class="proj-tag">Docker</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-name">Travel Booking Platform</div>
+        <p class="proj-desc">3-service microservices backend for concurrent bookings with optimistic locking, 75% cache hit rate on pricing queries, and sub-5-min Jenkins rollback.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Spring Boot</span><span class="proj-tag">Redis</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">Jenkins</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-name">API Security Layer</div>
+        <p class="proj-desc">Centralized JWT + RBAC security layer across two client-facing applications. Enforces token refresh flows, role-scoped access, and Spring Security hardening.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">JWT</span><span class="proj-tag">Spring Security</span><span class="proj-tag">OAuth2</span><span class="proj-tag">RBAC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <h2 class="section-title">Certifications</h2>
+    <ul class="cert-list">
+      <li><span class="cert-dot"></span>Java Programming and SQL Database Management — Kodnest Technologies</li>
+      <li><span class="cert-dot"></span>30-Day Internship on Machine Learning — Pantech e-Learning Pvt Ltd</li>
+    </ul>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-title">Contact Me</h2>
+    <div class="contact-wrap">
+      <p class="contact-intro">
+        Open to backend, distributed systems, or cloud engineering roles. Reach out directly — I respond within 24 hours.
+      </p>
+      <div class="contact-card">
+        <div class="contact-row">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:tharunsai909@gmail.com">tharunsai909@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value"><a href="tel:+917899932078">+91 78999 32078</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">💼</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value"><a href="https://www.linkedin.com/in/saitharun701" target="_blank" rel="noopener">linkedin.com/in/saitharun701</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Bengaluru, India — Open to remote &amp; relocation</div>
+          </div>
+        </div>
+        <a class="btn-email" href="mailto:tharunsai909@gmail.com?subject=Opportunity%20for%20Sai%20Tharun%20Sanga&body=Hi%20Sai%20Tharun%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%20from%20%5BCompany%5D.%0A%0AI%20came%20across%20your%20profile%20and%20wanted%20to%20discuss%20an%20opportunity%3A%0A%0ARole%3A%20%0ALocation%3A%20%0ATech%20Stack%3A%20%0A%0ALooking%20forward%20to%20connecting!">
+          ✉️ &nbsp; Send me an Email
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Sai Tharun Sanga &nbsp;·&nbsp; Bengaluru, India
+  </footer>
+
+</body>
+</html>
